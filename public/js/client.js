@@ -16,7 +16,7 @@ $(function(){
         success: getSongs,
         //function to alert user that song is not alreay in list
         statusCode: {418: function () {
-          alert('Your Not Orginal');
+          alert('You Are Not Original');
         }},
 
       });//end of ajax
