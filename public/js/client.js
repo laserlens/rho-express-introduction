@@ -35,12 +35,12 @@ function getSongs() {
 
       $('#songs').empty();
       var n = 0
+      var dateAdded =timeStamp();//Date ();//make a variable that equals internal date funtion
+      //console.log('todays date',dateAdded);
+      $('#hideThis').val(dateAdded);
 
       songs.forEach(function(song){
 
-        var dateAdded = timeStamp();//Date ();//make a variable that equals internal date funtion
-        //console.log('todays date',dateAdded);
-        $('#hideThis').val(dateAdded);
         var $li = $('<li id="li'+n+'"></li>');
         $li.css('border', 'solid');
         $li.append('<p name=title >'+ song.title + '</p>');
