@@ -13,7 +13,11 @@ $(function(){
         type: 'POST',
         url: '/songs',
         data: formData,
-        success: getSongs
+        success: getSongs,
+        //function to alert user that song is not alreay in list
+        statusCode: {418: function () {
+          alert('Your Not Orginal');
+        }},
 
       });//end of ajax
 

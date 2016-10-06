@@ -40,13 +40,13 @@ var songs = [];
 app.post('/songs', function(req, res){
   var newSong = true;
   songs.forEach(function (song) {//funtion to run through songs an compare
-    if (req.body.title == song.title && req.body.artist == song.artist) {
+    if (req.body.title.toLowerCase().trim() == song.title && req.body.artist.toLowerCase().trim() == song.artist.toLowerCase().trim()) {
       newSong = false;
     }
   });
   //create if else statment to compare input submited to songs array
   if (newSong != true) {
-  res.send('meow');
+  res.sendStatus(418);
 }else{
   //console.log('req.body:', req.body);
   songs.push(req.body);
