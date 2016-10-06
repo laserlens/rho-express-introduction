@@ -1,0 +1,9 @@
+body{
+  text-align: center;
+}
+li{
+  list-style-type: none;
+}
+#hideThis{
+  display: none;
+}

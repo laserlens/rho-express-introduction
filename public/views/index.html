@@ -5,6 +5,7 @@
     <title></title>
 
     <!-- localhost:3000/js/client.js -->
+    <link rel="stylesheet" href="styles/styles.css" media="screen">
     <script src="vendor/jquery/dist/jquery.min.js" charset="utf-8"></script>
     <script src="js/client.js" charset="utf-8"></script>
   </head>
@@ -17,10 +18,12 @@
     <h2>Add a new song:</h2>
     <form>
       <label>Title</label>
-      <input type="text" name="title"/>
+      <input type="text" name="title" required/>
 
       <label>Artist</label>
-      <input type="text" name="artist"/>
+      <input type="text" name="artist" required/>
+
+      <input type="text" name="dateAdded" id='hideThis'/>
 
       <input type="submit"/>
     </form>

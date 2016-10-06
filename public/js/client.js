@@ -4,17 +4,22 @@ $(function(){
 
   // listen for submit events and send new songs to the server
   $('form').on('submit', function(event){
-    event.preventDefault();
-    var formData = $(this).serialize();
-    $.ajax({
-      type: 'POST',
-      url: '/songs',
-      data: formData,
-      success: getSongs
-    });
+
+
+      //console.log('check this', songs);
+      event.preventDefault();
+      var formData = $(this).serialize();
+      $.ajax({
+        type: 'POST',
+        url: '/songs',
+        data: formData,
+        success: getSongs
+
+      });//end of ajax
 
     $(this).find('input[type=text]').val('');
-  });
+
+  });//end of form submit
 });
 
 function getSongs() {
@@ -22,13 +27,48 @@ function getSongs() {
     type: 'GET',
     url: '/songs',
     success: function(songs){
+
+
       $('#songs').empty();
+      var n = 0
+
       songs.forEach(function(song){
-        var $li = $('<li></li>');
-        $li.append('<p>'+ song.title + '</p>');
-        $li.append('<p>by: '+ song.artist + '</p>');
+
+        var dateAdded = timeStamp();//Date ();//make a variable that equals internal date funtion
+        //console.log('todays date',dateAdded);
+        $('#hideThis').val(dateAdded);
+        var $li = $('<li id="li'+n+'"></li>');
+        $li.css('border', 'solid');
+        $li.append('<p name=title >'+ song.title + '</p>');
+        $li.append('<p name=artist >by: '+ song.artist + '</p>');
+        $li.append('<p name=dateAdded >Date Added to List: ' + dateAdded + '</p>')//add date to list
+        $li.append('<button type=click class=removeButton id="'+n+'">Remove</button>');
+        n+=1;
         $('#songs').append($li);
+
+        //console.log('object of songs', songs);//see object
+
+        //button function to remove object from array
+        //failed at removing info from server so setled for remove from html
+        $('.removeButton').click(function () {
+                var i = parseInt(this.id);
+               console.log('button test ' + i);
+               $("#li"+ i).remove();
+               });
       });
     }
   });
+}
+//cleaner date funtion then built in date funtion
+function timeStamp() {
+  var d = new Date();
+
+  var month = d.getMonth()+1;
+  var day = d.getDate();
+
+  var output = d.getFullYear() + '/' +
+      ((''+month).length<2 ? '0' : '') + month + '/' +
+      ((''+day).length<2 ? '0' : '') + day;
+  //console.log(output);
+  return output;
 }
